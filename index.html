@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Classical Cryptography Toolkit – Explore, Encrypt, Decrypt, and Compare Classical Ciphers. A Network Security mini project." />
+  <title>Classical Cryptography Toolkit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ========== TOAST CONTAINER ========== -->
+  <div id="toast-container"></div>
+
+  <!-- ========== SIDEBAR ========== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-icon">&#128274;</div>
+      <h2 class="logo-text">CryptoToolkit</h2>
+      <button class="sidebar-close-btn" id="sidebar-close-btn" aria-label="Close menu">&times;</button>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Main navigation">
+      <!-- Dashboard -->
+      <button class="nav-item active" data-target="dashboard">
+        <span class="nav-icon">&#127968;</span>
+        <span class="nav-label">Dashboard</span>
+      </button>
+
+      <div class="nav-group-title">Substitution Ciphers</div>
+      <button class="nav-item" data-target="caesar">
+        <span class="nav-icon">&#9878;</span>
+        <span class="nav-label">Caesar Cipher</span>
+      </button>
+      <button class="nav-item" data-target="monoalphabetic">
+        <span class="nav-icon">&#128289;</span>
+        <span class="nav-label">Monoalphabetic Cipher</span>
+      </button>
+      <button class="nav-item" data-target="playfair">
+        <span class="nav-icon">&#9638;</span>
+        <span class="nav-label">Playfair Cipher</span>
+      </button>
+      <button class="nav-item" data-target="hill">
+        <span class="nav-icon">&#9638;</span>
+        <span class="nav-label">Hill Cipher</span>
+      </button>
+      <button class="nav-item" data-target="vigenere">
+        <span class="nav-icon">&#128273;</span>
+        <span class="nav-label">Vigenère Cipher</span>
+      </button>
+      <button class="nav-item" data-target="otp">
+        <span class="nav-icon">&#127922;</span>
+        <span class="nav-label">One-Time Pad</span>
+      </button>
+
+      <div class="nav-group-title">Transposition Ciphers</div>
+      <button class="nav-item" data-target="railfence">
+        <span class="nav-icon">&#128648;</span>
+        <span class="nav-label">Rail Fence Cipher</span>
+      </button>
+      <button class="nav-item" data-target="columnar">
+        <span class="nav-icon">&#9783;</span>
+        <span class="nav-label">Columnar Transposition</span>
+      </button>
+
+      <div class="nav-group-title">Utilities</div>
+      <button class="nav-item" data-target="compare">
+        <span class="nav-icon">&#128202;</span>
+        <span class="nav-label">Compare Algorithms</span>
+      </button>
+      <button class="nav-item" data-target="file-encrypt">
+        <span class="nav-icon">&#128196;</span>
+        <span class="nav-label">Encrypt Text File</span>
+      </button>
+      <button class="nav-item" data-target="file-decrypt">
+        <span class="nav-icon">&#128194;</span>
+        <span class="nav-label">Decrypt Text File</span>
+      </button>
+      <button class="nav-item" data-target="help">
+        <span class="nav-icon">&#10067;</span>
+        <span class="nav-label">Help</span>
+      </button>
+      <button class="nav-item" data-target="exit">
+        <span class="nav-icon">&#128682;</span>
+        <span class="nav-label">Exit</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p>Network Security &bull; 2026-27</p>
+    </div>
+  </aside>
+
+  <!-- ========== MAIN WRAPPER ========== -->
+  <div class="main-wrapper" id="main-wrapper">
+
+    <!-- Top Bar -->
+    <header class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Open menu">&#9776;</button>
+      <div class="topbar-title">
+        <h1>CLASSICAL CRYPTOGRAPHY TOOLKIT</h1>
+        <p class="subtitle">Explore, Encrypt, Decrypt, and Compare Classical Ciphers.</p>
+      </div>
+      <div class="topbar-actions">
+        <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle theme" title="Toggle Light/Dark Theme">
+          <span id="theme-icon">&#9790;</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ========== CONTENT SECTIONS ========== -->
+    <main class="content-area" id="content-area">
+
+      <!-- ===== DASHBOARD ===== -->
+      <section class="page active" id="page-dashboard">
+        <div class="page-header">
+          <h2>&#127968; Dashboard</h2>
+          <p>Welcome to the Classical Cryptography Toolkit. Select a cipher from the sidebar to begin.</p>
+        </div>
+        <div class="dashboard-grid">
+          <div class="dash-card" data-goto="caesar">
+            <div class="dash-card-icon">&#9878;</div>
+            <h3>Caesar Cipher</h3>
+            <p>Shift-based substitution cipher invented by Julius Caesar.</p>
+            <span class="badge badge-sub">Substitution</span>
+          </div>
+          <div class="dash-card" data-goto="monoalphabetic">
+            <div class="dash-card-icon">&#128289;</div>
+            <h3>Monoalphabetic</h3>
+            <p>Fixed one-to-one letter mapping substitution cipher.</p>
+            <span class="badge badge-sub">Substitution</span>
+          </div>
+          <div class="dash-card" data-goto="playfair">
+            <div class="dash-card-icon">&#9638;</div>
+            <h3>Playfair Cipher</h3>
+            <p>Digraph-based cipher using a 5×5 key matrix.</p>
+            <span class="badge badge-sub">Substitution</span>
+          </div>
+          <div class="dash-card" data-goto="hill">
+            <div class="dash-card-icon">&#9638;</div>
+            <h3>Hill Cipher</h3>
+            <p>Matrix multiplication-based polygraphic cipher.</p>
+            <span class="badge badge-sub">Substitution</span>
+          </div>
+          <div class="dash-card" data-goto="vigenere">
+            <div class="dash-card-icon">&#128273;</div>
+            <h3>Vigenère Cipher</h3>
+            <p>Polyalphabetic cipher using a repeating keyword.</p>
+            <span class="badge badge-sub">Substitution</span>
+          </div>
+          <div class="dash-card" data-goto="otp">
+            <div class="dash-card-icon">&#127922;</div>
+            <h3>One-Time Pad</h3>
+            <p>Theoretically unbreakable cipher with a random key.</p>
+            <span class="badge badge-sub">Substitution</span>
+          </div>
+          <div class="dash-card" data-goto="railfence">
+            <div class="dash-card-icon">&#128648;</div>
+            <h3>Rail Fence</h3>
+            <p>Transposition cipher that writes text in a zigzag pattern.</p>
+            <span class="badge badge-trans">Transposition</span>
+          </div>
+          <div class="dash-card" data-goto="columnar">
+            <div class="dash-card-icon">&#9783;</div>
+            <h3>Columnar Transposition</h3>
+            <p>Rearranges text by writing into rows and reading columns.</p>
+            <span class="badge badge-trans">Transposition</span>
+          </div>
+          <div class="dash-card" data-goto="compare">
+            <div class="dash-card-icon">&#128202;</div>
+            <h3>Compare Algorithms</h3>
+            <p>Side-by-side comparison of all cipher algorithms.</p>
+            <span class="badge badge-util">Utility</span>
+          </div>
+          <div class="dash-card" data-goto="file-encrypt">
+            <div class="dash-card-icon">&#128196;</div>
+            <h3>Encrypt File</h3>
+            <p>Upload and encrypt a text file with any cipher.</p>
+            <span class="badge badge-util">Utility</span>
+          </div>
+          <div class="dash-card" data-goto="file-decrypt">
+            <div class="dash-card-icon">&#128194;</div>
+            <h3>Decrypt File</h3>
+            <p>Upload and decrypt a previously encrypted text file.</p>
+            <span class="badge badge-util">Utility</span>
+          </div>
+          <div class="dash-card" data-goto="help">
+            <div class="dash-card-icon">&#10067;</div>
+            <h3>Help &amp; Docs</h3>
+            <p>Learn about ciphers, usage guide, and glossary.</p>
+            <span class="badge badge-util">Utility</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CAESAR CIPHER ===== -->
+      <section class="page" id="page-caesar">
+        <div class="page-header">
+          <h2>&#9878; Caesar Cipher</h2>
+          <p>A simple substitution cipher where each letter is shifted by a fixed number of positions in the alphabet. Named after Julius Caesar, who used it for military correspondence.</p>
+        </div>
+        <div class="cipher-card">
+          <div class="input-group">
+            <label for="caesar-plaintext">Plaintext</label>
+            <textarea id="caesar-plaintext" rows="3" placeholder="Enter text to encrypt..."></textarea>
+          </div>
+          <div class="input-group">
+            <label for="caesar-key">Shift Key (integer, 0–25)</label>
+            <input type="number" id="caesar-key" min="0" max="25" value="3" />
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="caesarEncrypt()">&#128274; Encrypt</button>
+            <button class="btn btn-secondary" onclick="caesarDecrypt()">&#128275; Decrypt</button>
+            <button class="btn btn-outline" onclick="clearCipher('caesar')">&#128465; Clear</button>
+            <button class="btn btn-ghost" onclick="loadExample('caesar')">&#128218; Load Example</button>
+          </div>
+          <div class="output-group">
+            <label>Ciphertext</label>
+            <div class="output-box" id="caesar-ciphertext">—</div>
+            <button class="copy-btn" onclick="copyOutput('caesar-ciphertext')">&#128203; Copy</button>
+          </div>
+          <div class="output-group">
+            <label>Decrypted Text</label>
+            <div class="output-box" id="caesar-decrypted">—</div>
+            <button class="copy-btn" onclick="copyOutput('caesar-decrypted')">&#128203; Copy</button>
+          </div>
+          <div class="output-group">
+            <label>Execution Time</label>
+            <div class="output-box output-time" id="caesar-time">—</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== MONOALPHABETIC CIPHER ===== -->
+      <section class="page" id="page-monoalphabetic">
+        <div class="page-header">
+          <h2>&#128289; Monoalphabetic Cipher</h2>
+          <p>Each letter is replaced by another letter using a fixed substitution key — a permutation of the 26 English letters. Preserves case and non-alphabetic characters.</p>
+        </div>
+        <div class="cipher-card">
+          <div class="input-group">
+            <label for="mono-plaintext">Plaintext</label>
+            <textarea id="mono-plaintext" rows="3" placeholder="Enter text to encrypt..."></textarea>
+          </div>
+          <div class="input-group">
+            <label for="mono-key">Substitution Key (26 unique letters A–Z)</label>
+            <input type="text" id="mono-key" maxlength="26" placeholder="e.g. QWERTYUIOPASDFGHJKLZXCVBNM" style="text-transform:uppercase" />
+            <button class="btn btn-ghost btn-sm" onclick="generateMonoKey()">&#127922; Generate Random Key</button>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="monoEncrypt()">&#128274; Encrypt</button>
+            <button class="btn btn-secondary" onclick="monoDecrypt()">&#128275; Decrypt</button>
+            <button class="btn btn-outline" onclick="clearCipher('mono')">&#128465; Clear</button>
+            <button class="btn btn-ghost" onclick="loadExample('mono')">&#128218; Load Example</button>
+          </div>
+          <div class="output-group">
+            <label>Ciphertext</label>
+            <div class="output-box" id="mono-ciphertext">—</div>
+            <button class="copy-btn" onclick="copyOutput('mono-ciphertext')">&#128203; Copy</button>
+          </div>
+          <div class="output-group">
+            <label>Decrypted Text</label>
+            <div class="output-box" id="mono-decrypted">—</div>
+            <button class="copy-btn" onclick="copyOutput('mono-decrypted')">&#128203; Copy</button>
+          </div>
+          <div class="output-group">
+            <label>Execution Time</label>
+            <div class="output-box output-time" id="mono-time">—</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== PLAYFAIR CIPHER ===== -->
+      <section class="page" id="page-playfair">
+        <div class="page-header">
+          <h2>&#9638; Playfair Cipher</h2>
+          <p>A digraph substitution cipher that encrypts pairs of letters using a 5×5 key matrix. I and J share the same cell. Filler characters (X) are inserted between repeated letters in a pair, and to pad odd-length input.</p>
+        </div>
+        <div class="cipher-card">
+          <div class="input-group">
+            <label for="playfair-plaintext">Plaintext</label>
+            <textarea id="playfair-plaintext" rows="3" placeholder="Enter text to encrypt..."></textarea>
+          </div>
+          <div class="input-group">
+            <label for="playfair-key">Keyword</label>
+            <input type="text" id="playfair-key" placeholder="e.g. MONARCHY" style="text-transform:uppercase" />
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="playfairEncrypt()">&#128274; Encrypt</button>
+            <button class="btn btn-secondary" onclick="playfairDecrypt()">&#128275; Decrypt</button>
+            <button class="btn btn-outline" onclick="clearCipher('playfair')">&#128465; Clear</button>
+            <button class="btn btn-ghost" onclick="loadExample('playfair')">&#128218; Load Example</button>
+          </div>
+          <div class="output-group">
+            <label>5×5 Key Matrix</label>
+            <div class="output-box matrix-display" id="playfair-matrix">—</div>
+          </div>
+          <div class="output-group">
+            <label>Ciphertext</label>
+            <div class="output-box" id="playfair-ciphertext">—</div>
+            <button class="copy-btn" onclick="copyOutput('playfair-ciphertext')">&#128203; Copy</button>
+          </div>
+          <div class="output-group">
+            <label>Decrypted Text</label>
+            <div class="output-box" id="playfair-decrypted">—</div>
+            <button class="copy-btn" onclick="copyOutput('playfair-decrypted')">&#128203; Copy</button>
+          </div>
+          <div class="info-note">&#9888; Decryption may retain filler characters (X) that were inserted during encryption.</div>
+          <div class="output-group">
+            <label>Execution Time</label>
+            <div class="output-box output-time" id="playfair-time">—</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== HILL CIPHER ===== -->
+      <section class="page" id="page-hill">
+        <div class="page-header">
+          <h2>&#9638; Hill Cipher</h2>
+          <p>A polygraphic cipher using matrix multiplication over mod 26. This implementation supports a 2×2 key matrix. The key matrix must have a determinant coprime with 26 for decryption to work.</p>
+        </div>
+        <div class="cipher-card">
+          <div class="input-group">
+            <label for="hill-plaintext">Plaintext (letters only, case ignored)</label>
+            <textarea id="hill-plaintext" rows="3" placeholder="Enter text to encrypt (letters only)..."></textarea>
+          </div>
+          <div class="input-group">
+            <label>2×2 Key Matrix (four integers, 0–25)</label>
+            <div class="matrix-input-grid">
+              <input type="number" id="hill-k00" min="0" max="25" value="6" placeholder="a" />
+              <input type="number" id="hill-k01" min="0" max="25" value="24" placeholder="b" />
+              <input type="number" id="hill-k10" min="0" max="25" value="1" placeholder="c" />
+              <input type="number" id="hill-k11" min="0" max="25" value="13" placeholder="d" />
+            </div>
+            <small>Matrix: [[a, b], [c, d]]. Det must be coprime with 26.</small>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="hillEncrypt()">&#128274; Encrypt</button>
+            <button class="btn btn-secondary" onclick="hillDecrypt()">&#128275; Decrypt</button>
+            <button class="btn btn-outline" onclick="clearCipher('hill')">&#128465; Clear</button>
+            <button class="btn btn-ghost" onclick="loadExample('hill')">&#128218; Load Example</button>
+          </div>
+          <div class="output-group">
+            <label>Key Matrix &amp; Inverse Matrix</label>
+            <div class="output-box matrix-display" id="hill-matrix-display">—</div>
+          </div>
+          <div class="output-group">
+            <label>Ciphertext</label>
+            <div class="output-box" id="hill-ciphertext">—</div>
+            <button class="copy-btn" onclick="copyOutput('hill-ciphertext')">&#128203; Copy</button>
+          </div>
+          <div class="output-group">
+            <label>Decrypted Text</label>
+            <div class="output-box" id="hill-decrypted">—</div>
+            <button class="copy-btn" onclick="copyOutput('hill-decrypted')">&#128203; Copy</button>
+          </div>
+          <div class="info-note">&#9888; Only alphabetic characters are processed. Input is uppercased. Odd-length input is padded with 'X'.</div>
+          <div class="output-group">
+            <label>Execution Time</label>
+            <div class="output-box output-time" id="hill-time">—</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== VIGENÈRE CIPHER ===== -->
+      <section class="page" id="page-vigenere">
+        <div class="page-header">
+          <h2>&#128273; Vigenère Cipher</h2>
+          <p>A polyalphabetic substitution cipher that uses a repeating keyword to shift each letter. Non-alphabetic characters are preserved and do not advance the key position.</p>
+        </div>
+        <div class="cipher-card">
+          <div class="input-group">
+            <label for="vigenere-plaintext">Plaintext</label>
+            <textarea id="vigenere-plaintext" rows="3" placeholder="Enter text to encrypt..."></textarea>
+          </div>
+          <div class="input-group">
+            <label for="vigenere-key">Keyword (letters only)</label>
+            <input type="text" id="vigenere-key" placeholder="e.g. LEMON" style="text-transform:uppercase" />
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="vigenereEncrypt()">&#128274; Encrypt</button>
+            <button class="btn btn-secondary" onclick="vigenereDecrypt()">&#128275; Decrypt</button>
+            <button class="btn btn-outline" onclick="clearCipher('vigenere')">&#128465; Clear</button>
+            <button class="btn btn-ghost" onclick="loadExample('vigenere')">&#128218; Load Example</button>
+          </div>
+          <div class="output-group">
+            <label>Ciphertext</label>
+            <div class="output-box" id="vigenere-ciphertext">—</div>
+            <button class="copy-btn" onclick="copyOutput('vigenere-ciphertext')">&#128203; Copy</button>
+          </div>
+          <div class="output-group">
+            <label>Decrypted Text</label>
+            <div class="output-box" id="vigenere-decrypted">—</div>
+            <button class="copy-btn" onclick="copyOutput('vigenere-decrypted')">&#128203; Copy</button>
+          </div>
+          <div class="output-group">
+            <label>Execution Time</label>
+            <div class="output-box output-time" id="vigenere-time">—</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== ONE-TIME PAD ===== -->
+      <section class="page" id="page-otp">
+        <div class="page-header">
+          <h2>&#127922; One-Time Pad</h2>
+          <p>Theoretically unbreakable when the key is truly random, as long as the plaintext, kept secret, and never reused. Each letter of the key shifts the corresponding plaintext letter.</p>
+        </div>
+        <div class="cipher-card">
+          <div class="input-group">
+            <label for="otp-plaintext">Plaintext</label>
+            <textarea id="otp-plaintext" rows="3" placeholder="Enter text to encrypt..."></textarea>
+          </div>
+          <div class="input-group">
+            <label for="otp-key">Key (letters only, must match letter count of plaintext)</label>
+            <input type="text" id="otp-key" placeholder="Generated or manual key" style="text-transform:uppercase" />
+            <div class="btn-row" style="margin-top:0.5rem">
+              <button class="btn btn-ghost btn-sm" onclick="generateOTPKey()">&#127922; Generate Key</button>
+              <button class="btn btn-ghost btn-sm" onclick="copyOutput('otp-key')">&#128203; Copy Key</button>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="otpEncrypt()">&#128274; Encrypt</button>
+            <button class="btn btn-secondary" onclick="otpDecrypt()">&#128275; Decrypt</button>
+            <button class="btn btn-outline" onclick="clearCipher('otp')">&#128465; Clear</button>
+            <button class="btn btn-ghost" onclick="loadExample('otp')">&#128218; Load Example</button>
+          </div>
+          <div class="output-group">
+            <label>Ciphertext</label>
+            <div class="output-box" id="otp-ciphertext">—</div>
+            <button class="copy-btn" onclick="copyOutput('otp-ciphertext')">&#128203; Copy</button>
+          </div>
+          <div class="output-group">
+            <label>Decrypted Text</label>
+            <div class="output-box" id="otp-decrypted">—</div>
+            <button class="copy-btn" onclick="copyOutput('otp-decrypted')">&#128203; Copy</button>
+          </div>
+          <div class="info-note">&#9888; True OTP security requires a genuinely random key, kept secret, and never reused. Browser-generated keys use <code>Math.random()</code> and are <strong>not</strong> cryptographically secure.</div>
+          <div class="output-group">
+            <label>Execution Time</label>
+            <div class="output-box output-time" id="otp-time">—</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== RAIL FENCE CIPHER ===== -->
+      <section class="page" id="page-railfence">
+        <div class="page-header">
+          <h2>&#128648; Rail Fence Cipher</h2>
+          <p>A transposition cipher that writes the plaintext in a zigzag pattern across a specified number of "rails" (rows), then reads off each row to produce the ciphertext. All characters including spaces and punctuation are preserved.</p>
+        </div>
+        <div class="cipher-card">
+          <div class="input-group">
+            <label for="railfence-plaintext">Plaintext</label>
+            <textarea id="railfence-plaintext" rows="3" placeholder="Enter text to encrypt..."></textarea>
+          </div>
+          <div class="input-group">
+            <label for="railfence-key">Number of Rails (≥ 2)</label>
+            <input type="number" id="railfence-key" min="2" value="3" />
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="railfenceEncrypt()">&#128274; Encrypt</button>
+            <button class="btn btn-secondary" onclick="railfenceDecrypt()">&#128275; Decrypt</button>
+            <button class="btn btn-outline" onclick="clearCipher('railfence')">&#128465; Clear</button>
+            <button class="btn btn-ghost" onclick="loadExample('railfence')">&#128218; Load Example</button>
+          </div>
+          <div class="output-group">
+            <label>Ciphertext</label>
+            <div class="output-box" id="railfence-ciphertext">—</div>
+            <button class="copy-btn" onclick="copyOutput('railfence-ciphertext')">&#128203; Copy</button>
+          </div>
+          <div class="output-group">
+            <label>Decrypted Text</label>
+            <div class="output-box" id="railfence-decrypted">—</div>
+            <button class="copy-btn" onclick="copyOutput('railfence-decrypted')">&#128203; Copy</button>
+          </div>
+          <div class="output-group">
+            <label>Execution Time</label>
+            <div class="output-box output-time" id="railfence-time">—</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== COLUMNAR TRANSPOSITION ===== -->
+      <section class="page" id="page-columnar">
+        <div class="page-header">
+          <h2>&#9783; Columnar Transposition Cipher</h2>
+          <p>The plaintext is written row-by-row into columns defined by the keyword length. Columns are then read out in the alphabetical order of the keyword letters. Ties in keyword letters are broken left-to-right (stable ordering). All characters are preserved.</p>
+        </div>
+        <div class="cipher-card">
+          <div class="input-group">
+            <label for="columnar-plaintext">Plaintext</label>
+            <textarea id="columnar-plaintext" rows="3" placeholder="Enter text to encrypt..."></textarea>
+          </div>
+          <div class="input-group">
+            <label for="columnar-key">Keyword</label>
+            <input type="text" id="columnar-key" placeholder="e.g. ZEBRAS" style="text-transform:uppercase" />
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="columnarEncrypt()">&#128274; Encrypt</button>
+            <button class="btn btn-secondary" onclick="columnarDecrypt()">&#128275; Decrypt</button>
+            <button class="btn btn-outline" onclick="clearCipher('columnar')">&#128465; Clear</button>
+            <button class="btn btn-ghost" onclick="loadExample('columnar')">&#128218; Load Example</button>
+          </div>
+          <div class="output-group">
+            <label>Ciphertext</label>
+            <div class="output-box" id="columnar-ciphertext">—</div>
+            <button class="copy-btn" onclick="copyOutput('columnar-ciphertext')">&#128203; Copy</button>
+          </div>
+          <div class="output-group">
+            <label>Decrypted Text</label>
+            <div class="output-box" id="columnar-decrypted">—</div>
+            <button class="copy-btn" onclick="copyOutput('columnar-decrypted')">&#128203; Copy</button>
+          </div>
+          <div class="output-group">
+            <label>Execution Time</label>
+            <div class="output-box output-time" id="columnar-time">—</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== COMPARE ALGORITHMS ===== -->
+      <section class="page" id="page-compare">
+        <div class="page-header">
+          <h2>&#128202; Compare Algorithms</h2>
+          <p>Enter a plaintext and select ciphers to compare. Timing is measured with <code>performance.now()</code> and is approximate — it depends on device speed and input size. Timings do not establish cryptographic security.</p>
+        </div>
+        <div class="cipher-card">
+          <div class="input-group">
+            <label for="compare-plaintext">Plaintext</label>
+            <textarea id="compare-plaintext" rows="3" placeholder="Enter text to compare across ciphers..."></textarea>
+          </div>
+          <div class="input-group">
+            <label>Select Ciphers to Compare</label>
+            <div class="checkbox-grid">
+              <label class="cb-label"><input type="checkbox" value="caesar" checked /> Caesar (key=3)</label>
+              <label class="cb-label"><input type="checkbox" value="monoalphabetic" checked /> Monoalphabetic</label>
+              <label class="cb-label"><input type="checkbox" value="playfair" checked /> Playfair (key=MONARCHY)</label>
+              <label class="cb-label"><input type="checkbox" value="hill" checked /> Hill (default matrix)</label>
+              <label class="cb-label"><input type="checkbox" value="vigenere" checked /> Vigenère (key=LEMON)</label>
+              <label class="cb-label"><input type="checkbox" value="otp" checked /> One-Time Pad</label>
+              <label class="cb-label"><input type="checkbox" value="railfence" checked /> Rail Fence (rails=3)</label>
+              <label class="cb-label"><input type="checkbox" value="columnar" checked /> Columnar (key=ZEBRAS)</label>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="runComparison()">&#9889; Run Comparison</button>
+            <button class="btn btn-outline" onclick="clearComparison()">&#128465; Clear</button>
+          </div>
+          <div class="table-responsive" id="compare-results" style="display:none;">
+            <table class="compare-table" id="compare-table">
+              <thead>
+                <tr>
+                  <th>Algorithm</th>
+                  <th>Category</th>
+                  <th>Key Type</th>
+                  <th>Ciphertext</th>
+                  <th>Encrypt Time</th>
+                  <th>Decrypt Time</th>
+                  <th>Round-Trip ✓</th>
+                </tr>
+              </thead>
+              <tbody id="compare-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== FILE ENCRYPT ===== -->
+      <section class="page" id="page-file-encrypt">
+        <div class="page-header">
+          <h2>&#128196; Encrypt Text File</h2>
+          <p>Upload a <code>.txt</code> file, choose a cipher and key, then download the encrypted version. <strong>Note:</strong> Classical ciphers are educational — do not use them for real-world data protection.</p>
+        </div>
+        <div class="cipher-card">
+          <div class="input-group">
+            <label for="file-enc-input">Upload .txt File</label>
+            <input type="file" id="file-enc-input" accept=".txt" />
+          </div>
+          <div class="output-group">
+            <label>File Contents</label>
+            <div class="output-box" id="file-enc-preview" style="max-height:200px;overflow-y:auto">—</div>
+          </div>
+          <div class="input-group">
+            <label for="file-enc-algo">Select Cipher</label>
+            <select id="file-enc-algo">
+              <option value="caesar">Caesar Cipher</option>
+              <option value="monoalphabetic">Monoalphabetic Cipher</option>
+              <option value="playfair">Playfair Cipher</option>
+              <option value="hill">Hill Cipher</option>
+              <option value="vigenere">Vigenère Cipher</option>
+              <option value="otp">One-Time Pad</option>
+              <option value="railfence">Rail Fence Cipher</option>
+              <option value="columnar">Columnar Transposition</option>
+            </select>
+          </div>
+          <div class="input-group" id="file-enc-key-group">
+            <label for="file-enc-key">Key</label>
+            <input type="text" id="file-enc-key" placeholder="Enter key for selected cipher" />
+            <small id="file-enc-key-hint">Caesar: integer 0–25 | Mono: 26 letters | Playfair/Vigenère/Columnar: keyword | Hill: a,b,c,d | Rail Fence: number ≥ 2 | OTP: auto-generated</small>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="encryptFile()">&#128274; Encrypt File</button>
+          </div>
+          <div class="output-group">
+            <label>Encrypted Output</label>
+            <div class="output-box" id="file-enc-output" style="max-height:200px;overflow-y:auto">—</div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" id="file-enc-download-btn" onclick="downloadFileEncrypted()" style="display:none;">&#11015; Download Encrypted File</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== FILE DECRYPT ===== -->
+      <section class="page" id="page-file-decrypt">
+        <div class="page-header">
+          <h2>&#128194; Decrypt Text File</h2>
+          <p>Upload a previously encrypted <code>.txt</code> file, select the original cipher and provide the key used during encryption.</p>
+        </div>
+        <div class="cipher-card">
+          <div class="input-group">
+            <label for="file-dec-input">Upload Encrypted .txt File</label>
+            <input type="file" id="file-dec-input" accept=".txt" />
+          </div>
+          <div class="output-group">
+            <label>Encrypted File Contents</label>
+            <div class="output-box" id="file-dec-preview" style="max-height:200px;overflow-y:auto">—</div>
+          </div>
+          <div class="input-group">
+            <label for="file-dec-algo">Select Original Cipher</label>
+            <select id="file-dec-algo">
+              <option value="caesar">Caesar Cipher</option>
+              <option value="monoalphabetic">Monoalphabetic Cipher</option>
+              <option value="playfair">Playfair Cipher</option>
+              <option value="hill">Hill Cipher</option>
+              <option value="vigenere">Vigenère Cipher</option>
+              <option value="otp">One-Time Pad</option>
+              <option value="railfence">Rail Fence Cipher</option>
+              <option value="columnar">Columnar Transposition</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="file-dec-key">Key</label>
+            <input type="text" id="file-dec-key" placeholder="Enter the key used during encryption" />
+            <small>Provide the same key and cipher that was used to encrypt.</small>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="decryptFile()">&#128275; Decrypt File</button>
+          </div>
+          <div class="output-group">
+            <label>Decrypted Output</label>
+            <div class="output-box" id="file-dec-output" style="max-height:200px;overflow-y:auto">—</div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-secondary" id="file-dec-download-btn" onclick="downloadFileDecrypted()" style="display:none;">&#11015; Download Decrypted File</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== HELP ===== -->
+      <section class="page" id="page-help">
+        <div class="page-header">
+          <h2>&#10067; Help &amp; Documentation</h2>
+          <p>Learn about classical cryptography, how to use each module, and the limitations of these educational algorithms.</p>
+        </div>
+        <div class="cipher-card help-content">
+          <details open>
+            <summary><strong>What is Classical Cryptography?</strong></summary>
+            <p>Classical cryptography refers to encryption techniques developed before the computer age. They use simple mathematical operations — shifting letters, substituting characters, or rearranging text — to transform readable <em>plaintext</em> into unreadable <em>ciphertext</em>. While no longer secure for real-world use, they form the foundation of modern cryptographic concepts.</p>
+          </details>
+
+          <details>
+            <summary><strong>Substitution vs. Transposition</strong></summary>
+            <p><strong>Substitution ciphers</strong> replace each character with another character. Examples: Caesar, Monoalphabetic, Playfair, Hill, Vigenère, One-Time Pad.</p>
+            <p><strong>Transposition ciphers</strong> rearrange the positions of characters without changing them. Examples: Rail Fence, Columnar Transposition.</p>
+          </details>
+
+          <details>
+            <summary><strong>Key Concepts</strong></summary>
+            <ul>
+              <li><strong>Plaintext:</strong> The original, readable message.</li>
+              <li><strong>Ciphertext:</strong> The encrypted, unreadable message.</li>
+              <li><strong>Encryption:</strong> Converting plaintext to ciphertext using a key.</li>
+              <li><strong>Decryption:</strong> Converting ciphertext back to plaintext using the same (or related) key.</li>
+              <li><strong>Key:</strong> A piece of information that controls the encryption/decryption process.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary><strong>Caesar Cipher</strong></summary>
+            <p>Shifts each letter by a fixed number. Key: integer 0–25. Example: shift 3 turns A→D, B→E, etc.</p>
+            <p><strong>Example:</strong> "ATTACK AT DAWN" with key 3 → "DWWDFN DW GDZQ"</p>
+          </details>
+
+          <details>
+            <summary><strong>Monoalphabetic Cipher</strong></summary>
+            <p>Uses a permutation of the alphabet as a substitution table. Key: 26 unique letters. Each letter maps to exactly one other letter.</p>
+          </details>
+
+          <details>
+            <summary><strong>Playfair Cipher</strong></summary>
+            <p>Uses a 5×5 matrix built from a keyword. Encrypts pairs (digraphs) of letters. I/J share a cell. Rules: same row → shift right; same column → shift down; rectangle → swap columns.</p>
+            <p><strong>Filler:</strong> 'X' is inserted between repeated letters in a pair and to pad odd-length text.</p>
+          </details>
+
+          <details>
+            <summary><strong>Hill Cipher</strong></summary>
+            <p>Uses matrix multiplication modulo 26. This toolkit uses a 2×2 matrix. The key matrix determinant must be coprime with 26 (i.e., not divisible by 2 or 13).</p>
+            <p><strong>Valid determinants (mod 26):</strong> 1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25</p>
+          </details>
+
+          <details>
+            <summary><strong>Vigenère Cipher</strong></summary>
+            <p>A polyalphabetic cipher using a repeating keyword. Each letter of the keyword determines the shift for the corresponding plaintext letter. Non-letters don't advance the key.</p>
+            <p><strong>Example:</strong> "ATTACKATDAWN" with key "LEMON" → "LXFOPVEFRNHR"</p>
+          </details>
+
+          <details>
+            <summary><strong>One-Time Pad</strong></summary>
+            <p>Uses a random key as long as the message. Theoretically unbreakable if the key is truly random, kept secret, and never reused. This toolkit generates pseudo-random keys using <code>Math.random()</code>, which is <strong>not</strong> cryptographically secure.</p>
+          </details>
+
+          <details>
+            <summary><strong>Rail Fence Cipher</strong></summary>
+            <p>Writes text in a zigzag pattern across N rails, then reads off each rail. Key: number of rails (≥ 2). All characters including spaces are rearranged.</p>
+          </details>
+
+          <details>
+            <summary><strong>Columnar Transposition</strong></summary>
+            <p>Text is written row-by-row into columns defined by the keyword length. Columns are read in alphabetical order of the keyword letters. Ties are broken left-to-right.</p>
+          </details>
+
+          <details>
+            <summary><strong>File Encryption/Decryption</strong></summary>
+            <p>Upload a .txt file, select a cipher and key, and encrypt/decrypt the contents. The same algorithm and key must be used for both operations. Download the result as a .txt file.</p>
+          </details>
+
+          <details>
+            <summary><strong>Key Validation Rules</strong></summary>
+            <ul>
+              <li><strong>Caesar:</strong> Integer 0–25</li>
+              <li><strong>Monoalphabetic:</strong> Exactly 26 unique English letters</li>
+              <li><strong>Playfair:</strong> Alphabetic keyword (non-empty)</li>
+              <li><strong>Hill:</strong> Four integers forming an invertible 2×2 matrix mod 26</li>
+              <li><strong>Vigenère:</strong> Non-empty alphabetic keyword</li>
+              <li><strong>OTP:</strong> Alphabetic key with length equal to the number of letters in the text</li>
+              <li><strong>Rail Fence:</strong> Integer ≥ 2</li>
+              <li><strong>Columnar:</strong> Non-empty alphabetic keyword</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary><strong>Limitations</strong></summary>
+            <ul>
+              <li>Classical ciphers are <strong>not secure</strong> for real-world use. They are vulnerable to frequency analysis, brute force, and known-plaintext attacks.</li>
+              <li>Playfair and Hill ciphers process only alphabetic characters and may add padding.</li>
+              <li>Browser-generated random keys (OTP) are not cryptographically secure.</li>
+              <li>Timing measurements are approximate and device-dependent.</li>
+              <li>File operations are limited to plain text (.txt) files.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary><strong>Glossary</strong></summary>
+            <ul>
+              <li><strong>Cipher:</strong> An algorithm for encryption and decryption.</li>
+              <li><strong>Cryptanalysis:</strong> The study of breaking ciphers.</li>
+              <li><strong>Digraph:</strong> A pair of two letters (used in Playfair).</li>
+              <li><strong>Frequency Analysis:</strong> Breaking ciphers by analyzing letter frequency.</li>
+              <li><strong>Modular Arithmetic:</strong> Arithmetic where numbers wrap around after reaching a modulus (e.g., mod 26).</li>
+              <li><strong>Polygraphic Cipher:</strong> Encrypts groups of letters at a time (e.g., Hill).</li>
+              <li><strong>Polyalphabetic Cipher:</strong> Uses multiple substitution alphabets (e.g., Vigenère).</li>
+              <li><strong>Transposition:</strong> Rearranging the order of characters without changing them.</li>
+            </ul>
+          </details>
+        </div>
+      </section>
+
+      <!-- ===== EXIT ===== -->
+      <section class="page" id="page-exit">
+        <div class="page-header">
+          <h2>&#128682; Exit</h2>
+          <p>Thank you for using the Classical Cryptography Toolkit!</p>
+        </div>
+        <div class="cipher-card exit-card">
+          <div class="exit-content">
+            <div class="exit-icon">&#128274;</div>
+            <h3>Session Options</h3>
+            <p>Choose an action below. Since this is a browser application, we cannot close the tab programmatically.</p>
+            <div class="btn-row exit-btns">
+              <button class="btn btn-primary" onclick="navigateTo('dashboard')">&#127968; Return to Dashboard</button>
+              <button class="btn btn-secondary" onclick="clearAllInputs()">&#128465; Clear All Inputs</button>
+              <button class="btn btn-outline" onclick="finishSession()">&#128075; Finish Session</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- ========== CONFIRM MODAL ========== -->
+  <div class="modal-overlay" id="confirm-modal" style="display:none;">
+    <div class="modal-box">
+      <h3 id="modal-title">Confirm</h3>
+      <p id="modal-message">Are you sure?</p>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="modal-confirm-btn">Yes</button>
+        <button class="btn btn-outline" id="modal-cancel-btn" onclick="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
